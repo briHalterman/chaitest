@@ -1,3 +1,11 @@
+// The application does not work at present because the routes for each of these operations have not been implemented.
+
+// new packages that are used in testing, installed as dev dependencies:
+  // - mocha
+  // - chai
+  // - chai-http
+  // - puppeteer
+
 const express = require("express");
 const app = express();
 app.use(express.static(__dirname + "/public"));
