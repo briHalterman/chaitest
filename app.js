@@ -59,9 +59,25 @@ app.get("/api/v1/people", (req, res) => {
 })
 
 // retrieving a single person entry
+// get request to /api/v1/people/:id
+// :id is the index of the entry to be retrieved
 app.get("/api/v1/people/:id", (req, res) => {
-
-})
+  const index = Number(req.params.id);
+  // unless the index is out of range (NaN, not an integer, less than 0 or greater than the length of people array)
+  if (
+    isNaN(index) ||
+    !Number.isInteger(index) ||
+    index < 0 ||
+    index >= people.length
+  ) {
+    // error message and a 404 result code
+    res.status(404).json({ message: "Record not found." });
+    return;
+  }
+  // return JSON document with the entry
+  const person = people[index];
+  res.json(person);
+});
 
 app.all("/api/v1/*", (req, res) => {
   res.json({ error: "That route is not implemented." });
