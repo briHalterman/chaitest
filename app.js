@@ -52,8 +52,10 @@ app.post("/api/v1/people", (req, res) => {
 })
 
 //  retrieving the list of people entries
+// get request to the URI /api/v1/people
 app.get("/api/v1/people", (req, res) => {
-
+  // JSON document containing the array
+  res.json(people);
 })
 
 // retrieving a single person entry
