@@ -5,22 +5,34 @@ const { app, server } = require("../app");
 chai.use(chaiHttp);
 chai.should();
 
+// most of the tests are not implemented -- there is just an invocation of done() (the callback)
+// test examples show how to do chai testing
+// chai is configured to use the "should" syntax for assertions
+// complete the tests -- functions that begin with "it"
+
+// The test.js file tests the back end, by sending REST requests to it.
 describe("People", () => {
   after(() => {
     server.close();
   });
   describe("post /api/v1/people", () => {
     it("should not create a people entry without a name", (done) => {
+      // cause a post request to be sent to the app for the URI specified
       chai
         .request(app)
         .post("/api/v1/people")
+        // specify the body to be sent (if any)
         .send({ age: 10 })
+        // retrieve the resulting req and res
         .end((err, res) => {
+          // result should have result code 400
           res.should.have.status(400);
+          // body of the result should equal the JSON object described
           res.body.should.be.eql({ error: "Please enter a name." });
           done();
         });
-    });
+      });
+      // can also do get/put/patch/delete
     it("should create a people entry with valid input", (done) => {
       // your code goes here
       done();

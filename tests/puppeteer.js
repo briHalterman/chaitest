@@ -9,6 +9,10 @@ function sleep(ms) {
 
 chai.should();
 
+// most of the tests are not implemented -- there are empty functions
+// test examples show how to do puppeteer testing
+// complete the tests -- functions that begin with "it"
+
 (async () => {
   describe("Functional Tests with Puppeteer", function () {
     let browser = null;
