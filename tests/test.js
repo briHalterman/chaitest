@@ -17,10 +17,10 @@ describe("People", () => {
   });
   describe("post /api/v1/people", () => {
     it("should not create a people entry without a name", (done) => {
-      // cause a post request to be sent to the app for the URI specified
-        // can also do get/put/patch/delete
       chai
         .request(app)
+        // cause a post request to be sent to the app for the URI specified
+          // can also do get/put/patch/delete
         .post("/api/v1/people")
         // specify the body to be sent (if any)
         .send({ age: 10 })
@@ -32,10 +32,24 @@ describe("People", () => {
           res.body.should.be.eql({ error: "Please enter a name." });
           done();
         });
-      });
+    });
     it("should create a people entry with valid input", (done) => {
       // your code goes here
-      done();
+      chai
+        .request(app)
+        // post request to URL
+        .post("/api/v1/people")
+        // specify the body to be sent (if any)
+        .send({ name: "Shayne", age: 12 })
+        // retrieve the resulting req and res
+        .end((err, res) => {
+          // result should have result code 201
+          res.should.have.status(201);
+          // body of the result should equal the JSON object described
+          res.body.should.be.eql({ message: "A person record was added." });
+          this.lastIndex = res.body.index;
+          done();
+        });
     });
   });
   describe("get /api/v1/people", () => {
