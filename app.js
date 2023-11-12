@@ -26,13 +26,13 @@ app.post("/api/v1/people", (req, res) => {
   // if no name in req.body
   if (!req.body.name) {
     // return json document with 400 result code and message
-    res.status(400).json({ error: "Please enter name." });
+    res.status(400).json({ error: "Please enter a name." });
     return;
   }
   // if no age in req.body
   if (!req.body.age) {
     // return json document with 400 result code and message 
-    res.status(400).json({ error: "Please enter age." });
+    res.status(400).json({ error: "Please enter an age." });
     return;
   }
   // age must be non-negative number
@@ -40,7 +40,7 @@ app.post("/api/v1/people", (req, res) => {
   // if age is NaN (not a number) and/or less than 0
   if (isNaN(age) || age < 0) {
     // return json document with 400 result code and message
-    res.status(400).json({ error: "Please enter valid age." })
+    res.status(400).json({ error: "Please enter agit status valid age." })
   }
   // create entry
   req.body.age = age;

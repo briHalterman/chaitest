@@ -18,6 +18,7 @@ describe("People", () => {
   describe("post /api/v1/people", () => {
     it("should not create a people entry without a name", (done) => {
       // cause a post request to be sent to the app for the URI specified
+        // can also do get/put/patch/delete
       chai
         .request(app)
         .post("/api/v1/people")
@@ -32,7 +33,6 @@ describe("People", () => {
           done();
         });
       });
-      // can also do get/put/patch/delete
     it("should create a people entry with valid input", (done) => {
       // your code goes here
       done();
