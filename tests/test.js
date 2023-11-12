@@ -46,13 +46,14 @@ describe("People", () => {
           // result should have result code 201
           res.should.have.status(201);
           // body of the result should equal the JSON object described
-          res.body.should.be.eql({ message: "A person record was added." });
+          res.body.should.contain({ message: "A person record was added." });
           this.lastIndex = res.body.index;
           done();
       });
     });
   });
   describe("get /api/v1/people", () => {
+    console.log(this.lastIndex + 1);
     it(`should return an array of person entries of length ${this.lastIndex + 1}`, (done) => {
       // your code goes here
       chai

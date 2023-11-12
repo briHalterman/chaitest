@@ -48,7 +48,7 @@ app.post("/api/v1/people", (req, res) => {
   people.push(req.body)
   // if entry is created
   // return JSON document with a message saying that "A person entry was added" along with the index of the entry just added
-  res.status(201).json({ message: "A person record was added." });
+  res.status(201).json({ message: "A person record was added.", index: req.body.index });
 })
 
 //  retrieving the list of people entries
