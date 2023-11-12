@@ -49,13 +49,26 @@ describe("People", () => {
           res.body.should.be.eql({ message: "A person record was added." });
           this.lastIndex = res.body.index;
           done();
-        });
+      });
     });
   });
   describe("get /api/v1/people", () => {
     it(`should return an array of person entries of length ${this.lastIndex + 1}`, (done) => {
-           // your code goes here
-           done();
+      // your code goes here
+      chai
+      .request(app)
+      // post request to URL
+      .get("/api/v1/people")
+      // specify the body to be sent (if any)
+        // no body to be sent
+      // retrieve the resulting req and res
+      .end((err, res) => {
+        // result should have result code 200
+        res.should.have.status(200);
+        // body of the result should equal the JSON object described
+        res.body.should.have.length(this.lastIndex + 1);
+        done();
+      });
     });
   });
   describe("get /apl/v1/people/:id", () => {
