@@ -49,33 +49,41 @@ describe("People", () => {
           res.body.should.contain({ message: "A person record was added." });
           this.lastIndex = res.body.index;
           done();
-      });
+        });
     });
   });
   describe("get /api/v1/people", () => {
-    console.log(this.lastIndex + 1);
+    // console.log(this.lastIndex + 1);
     it(`should return an array of person entries of length ${this.lastIndex + 1}`, (done) => {
       // your code goes here
       chai
-      .request(app)
-      // post request to URL
-      .get("/api/v1/people")
-      // specify the body to be sent (if any)
-        // no body to be sent
-      // retrieve the resulting req and res
-      .end((err, res) => {
-        // result should have result code 200
-        res.should.have.status(200);
-        // body of the result should equal the JSON object described
-        res.body.should.have.length(this.lastIndex + 1);
-        done();
-      });
+        .request(app)
+        // post request to URL
+        .get("/api/v1/people")
+        // specify the body to be sent (if any)
+          // no body to be sent
+        // retrieve the resulting req and res
+        .end((err, res) => {
+          // result should have result code 200
+          res.should.have.status(200);
+          // body of the result should equal the JSON object described
+          res.body.should.have.length(this.lastIndex + 1);
+          done();
+        });
     });
   });
-  describe("get /apl/v1/people/:id", () => {
+  describe("get /api/v1/people/:id", () => {
     it("should return the entry corresponding to the last person added.", (done) => {
       // your code goes here
-      done();
+      chai
+        .request(app)
+        .get(`/api/v1/people/${this.lastIndex}`)
+        .end((err, res) => {
+          res.should.have.status(200)
+          res.body.name.should.be.eql("Shayne")
+          done();
+        })
+      
     });
     it("should return an error if the index is >= the length of the array", (done) => {
             // your code goes here

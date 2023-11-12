@@ -40,7 +40,8 @@ app.post("/api/v1/people", (req, res) => {
   // if age is NaN (not a number) and/or less than 0
   if (isNaN(age) || age < 0) {
     // return json document with 400 result code and message
-    res.status(400).json({ error: "Please enter a valid age." })
+    res.status(400).json({ error: "Please enter a valid age." });
+    return;
   }
   // create entry
   req.body.age = age;
@@ -48,8 +49,10 @@ app.post("/api/v1/people", (req, res) => {
   people.push(req.body)
   // if entry is created
   // return JSON document with a message saying that "A person entry was added" along with the index of the entry just added
-  res.status(201).json({ message: "A person record was added.", index: req.body.index });
-})
+  res
+    .status(201)
+    .json({ message: "A person record was added.", index: req.body.index });
+});
 
 //  retrieving the list of people entries
 // get request to the URI /api/v1/people
@@ -75,8 +78,9 @@ app.get("/api/v1/people/:id", (req, res) => {
     return;
   }
   // return JSON document with the entry
-  const person = people[index];
-  res.json(person);
+  // const person = people[index];
+  // res.json(person);
+  res.json(people[index]);
 });
 
 app.all("/api/v1/*", (req, res) => {
