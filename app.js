@@ -80,7 +80,7 @@ app.get("/api/v1/people/:id", (req, res) => {
   // return JSON document with the entry
   // const person = people[index];
   // res.json(person);
-  res.json(people[index]);
+  res.json(people[index]); // refractor?
 });
 
 app.all("/api/v1/*", (req, res) => {

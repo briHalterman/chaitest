@@ -19,16 +19,16 @@ describe("People", () => {
     it("should not create a people entry without a name", (done) => {
       chai
         .request(app)
-        // cause a post request to be sent to the app for the URI specified
+        // cause a post request to be sent to the app for the URI specified (/api/v1/people)
           // can also do get/put/patch/delete
         .post("/api/v1/people")
-        // specify the body to be sent (if any)
+        // specify body to be sent (if any)
         .send({ age: 10 })
-        // retrieve the resulting req and res
+        // retrieve resulting req and res
         .end((err, res) => {
           // result should have result code 400
           res.should.have.status(400);
-          // body of the result should equal the JSON object described
+          // body of result should equal JSON object described
           res.body.should.be.eql({ error: "Please enter a name." });
           done();
         });
@@ -37,15 +37,15 @@ describe("People", () => {
       // your code goes here
       chai
         .request(app)
-        // post request to URL
+        // post request to /api/v1/people
         .post("/api/v1/people")
-        // specify the body to be sent (if any)
-        .send({ name: "Shayne", age: 12 })
-        // retrieve the resulting req and res
+        // specify body to be sent
+        .send({ name: "Tomme", age: 12 })
+        // retrieve resulting req and res
         .end((err, res) => {
           // result should have result code 201
           res.should.have.status(201);
-          // body of the result should equal the JSON object described
+          // body of result should equal JSON object described
           res.body.should.contain({ message: "A person record was added." });
           this.lastIndex = res.body.index;
           done();
@@ -58,16 +58,16 @@ describe("People", () => {
       // your code goes here
       chai
         .request(app)
-        // post request to URL
+        // get request to /api/v1/people
         .get("/api/v1/people")
-        // specify the body to be sent (if any)
+        // specify body to be sent (if any)
           // no body to be sent
-        // retrieve the resulting req and res
+        // retrieve resulting req and res
         .end((err, res) => {
           // result should have result code 200
           res.should.have.status(200);
-          // body of the result should equal the JSON object described
-          res.body.should.have.length(this.lastIndex + 1);
+          // body of the result should equal JSON object described
+          res.body.should.have.length(this.lastIndex + 1); // refractor?
           done();
         });
     });
@@ -77,17 +77,31 @@ describe("People", () => {
       // your code goes here
       chai
         .request(app)
-        .get(`/api/v1/people/${this.lastIndex}`)
+        // get request to /api/v1/people/:id
+        .get(`/api/v1/people/${this.lastIndex}`) // refractor?
+        // no body to be sent
+        // retrieve resulting req and res
         .end((err, res) => {
-          res.should.have.status(200)
-          res.body.name.should.be.eql("Shayne")
+          // result should have result code 200
+          res.should.have.status(200);
+          // body of the result should equal JSON object described
+          res.body.name.should.be.eql("Tomme")
           done();
         })
       
     });
     it("should return an error if the index is >= the length of the array", (done) => {
-            // your code goes here
-            done();
+      // your code goes here
+      chai
+        .request(app)
+        // get request to /api/v1/people/:id where id >= length of array
+        .get(`/api/v1/people/5`)
+        // retrieve resulting req and res
+        .end((err, res) => {
+          // result should have result code 404
+          res.should.have.status(404);
+          done();
+        })
     });
   });
 });
