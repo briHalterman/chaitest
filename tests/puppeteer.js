@@ -68,18 +68,19 @@ chai.should();
         this.listPeople.should.not.equal(null);
       });
       it("should create a person record given name and age", async function () {
-        // Type name into search box
+        // Type name into input field
         await this.nameField.type("Freya");
-        // Type age into search box
+        // Type age into input field
         await this.ageField.type("10");
         // Click addPerson button
         await this.addPerson.click();
         // wait a for page to update
         await sleep(200);
         const resultData = await (
-          // retrieve resulting html
+          // retrieve result html data
           await this.resultHandle.getProperty("textContent")
         ).jsonValue();
+        // console log result data
         console.log("at 1, resultData is ", resultData);
         // returned html should include "A person record was added"
         resultData.should.include("A person record was added");
@@ -90,6 +91,22 @@ chai.should();
         // your code goes here.  
         // Hint: to clear the age field, you need the line:
           // await page.$eval("#age", (el) => (el.value = ""));
+        // type a name into input field
+        await this.nameField.type("Slim");
+        // clear age input field
+        await page.$eval("#age", (el) => (el.value = ""));
+        // Click addPerson button
+        await this.addPerson.click();
+        // wait a for page to update
+        await sleep(200);
+        const resultData = await (
+          // retrieve resulting html
+          await this.resultHandle.getProperty("textContent")
+        ).jsonValue();
+        // console log result data
+        console.log("at 2, resultData is ", resultData);
+        // returned html should include "A person record was added"
+        resultData.should.include("Please enter an age.");
       });
       it("should return the entries just created", async function () {
          // your code goes here
