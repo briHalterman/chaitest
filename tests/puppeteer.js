@@ -12,6 +12,11 @@ chai.should();
 // most of the tests are not implemented -- there are empty functions
 // test examples show how to do puppeteer testing
 // complete the tests -- functions that begin with "it"
+// write code to interact with the browser automatically
+// You can fill out fields and press buttons and then check the contents of the HTML document returned. 
+// Fields and buttons are specified using CSS selectors. 
+// There are a lot of async calls, and a sleep function has been provided so that the test waits a little bit for the page to update.
+// tip: Mocha will often complain and throw strange errors if you do not end JavaScript statements with a semicolon.
 
 (async () => {
   describe("Functional Tests with Puppeteer", function () {
@@ -53,7 +58,7 @@ chai.should();
         this.listPeople.should.not.equal(null);
       });
       it("should create a person record given name and age", async function () {
-        await this.nameField.type("Fred");
+        await this.nameField.type("Freya");
         await this.ageField.type("10");
         await this.addPerson.click();
         await sleep(200);
@@ -66,8 +71,9 @@ chai.should();
         this.lastIndex = index;
       });
       it("should not create a person record without an age", async function () {
-        // your code goes here.  Hint: to clear the age field, you need the line
-        // await page.$eval("#age", (el) => (el.value = "")); 
+        // your code goes here.  
+        // Hint: to clear the age field, you need the line:
+          // await page.$eval("#age", (el) => (el.value = ""));
       });
       it("should return the entries just created", async function () {
          // your code goes here
