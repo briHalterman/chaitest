@@ -1,5 +1,5 @@
 // Puppeteer
-// Puppeteer is a Node.js library which provides a high-level API to control Chrome/Chromium over the DevTools Protocol.
+// a Node.js library which provides a high-level API to control Chrome/Chromium over the DevTools Protocol.
 // runs in headless mode by default
 // To use Puppeteer in your project, run:
   // npm i puppeteer

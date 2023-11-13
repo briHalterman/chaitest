@@ -98,7 +98,7 @@ describe("People", () => {
           // result should have result code 200
           res.should.have.status(200);
           // body of the result should equal JSON object described
-          res.body.should.have.length(this.lastIndex + 1); // refractor?
+          res.body.should.have.length(this.lastIndex + 1); // +
           done();
         });
     });
@@ -109,7 +109,7 @@ describe("People", () => {
       chai
         .request(app)
         // get request to /api/v1/people/:id
-        .get(`/api/v1/people/${this.lastIndex}`) // refractor?
+        .get(`/api/v1/people/${this.lastIndex}`) // +
         // no body to be sent
         // retrieve resulting req and res
         .end((err, res) => {
