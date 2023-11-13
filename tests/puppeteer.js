@@ -1,3 +1,10 @@
+// Puppeteer
+// Puppeteer is a Node.js library which provides a high-level API to control Chrome/Chromium over the DevTools Protocol.
+// runs in headless mode by default
+// To use Puppeteer in your project, run:
+  // npm i puppeteer
+// When you install Puppeteer, it automatically downloads a recent version of Chrome for Testing
+
 const puppeteer = require("puppeteer");
 require("dotenv").config();
 const chai = require("chai");
@@ -24,12 +31,15 @@ chai.should();
     let page = null;
     before(async function () {
       this.timeout(5000);
+      // Launch the browser and open a new blank page
       browser = await puppeteer.launch();
       page = await browser.newPage();
+      // Navigate the page to a URL
       await page.goto("http://localhost:3000");
     });
     after(async function () {
       this.timeout(5000);
+      // Close browser.
       await browser.close();
       server.close();
       return;
@@ -58,14 +68,20 @@ chai.should();
         this.listPeople.should.not.equal(null);
       });
       it("should create a person record given name and age", async function () {
+        // Type name into search box
         await this.nameField.type("Freya");
+        // Type age into search box
         await this.ageField.type("10");
+        // Click addPerson button
         await this.addPerson.click();
+        // wait a for page to update
         await sleep(200);
         const resultData = await (
+          // retrieve resulting html
           await this.resultHandle.getProperty("textContent")
         ).jsonValue();
         console.log("at 1, resultData is ", resultData);
+        // returned html should include "A person record was added"
         resultData.should.include("A person record was added");
         const { index } = JSON.parse(resultData);
         this.lastIndex = index;
