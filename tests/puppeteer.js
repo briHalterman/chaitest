@@ -105,14 +105,26 @@ chai.should();
         ).jsonValue();
         // console log result data
         console.log("at 2, resultData is ", resultData);
-        // returned html should include "A person record was added"
+        // returned html should include "Please enter an age."
         resultData.should.include("Please enter an age.");
       });
       it("should return the entries just created", async function () {
-         // your code goes here
+        // your code goes here
+        // Click listPeople button
+        await this.listPeople.click()
+        // wait a for page to update
+        await sleep(200);
+        const resultData = await (
+          // retrieve resulting html
+          await this.resultHandle.getProperty("textContent")
+        ).jsonValue();
+        // console log result data
+        console.log("at 3, resultData is ", resultData);
+        // returned html should include "A person record was added"
+        resultData.should.include("Freya");
       });
       it("should return the last entry.", async function () {
-         // your code goes here
+        // your code goes here
       });
     });
   });
