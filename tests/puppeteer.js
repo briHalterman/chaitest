@@ -120,11 +120,23 @@ chai.should();
         ).jsonValue();
         // console log result data
         console.log("at 3, resultData is ", resultData);
-        // returned html should include "A person record was added"
+        // returned html should include "Freya"
         resultData.should.include("Freya");
       });
       it("should return the last entry.", async function () {
         // your code goes here
+          // Click getPerson button
+          await this.getPerson.click()
+          // wait a for page to update
+          await sleep(200);
+          const resultData = await (
+            // retrieve resulting html
+            await this.resultHandle.getProperty("textContent")
+          ).jsonValue();
+          // console log result data
+          console.log("at 4, resultData is ", resultData);
+          // returned html should include "Freya"
+          resultData.should.include("Freya");
       });
     });
   });
