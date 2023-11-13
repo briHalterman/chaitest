@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const age = document.getElementById("age");
   const index = document.getElementById("index");
   const result = document.getElementById("result");
+
+  // add an entry to an array of people
   addPerson.addEventListener("click", async (event) => {
     event.preventDefault();
     try {
@@ -22,6 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
       result.textContent = err.message;
     }
   });
+
+  // retrieve the array of people
   listPeople.addEventListener("click", async (event) => {
     event.preventDefault();
     try {
@@ -34,12 +38,14 @@ document.addEventListener("DOMContentLoaded", () => {
       result.textContent = err.message;
     }
   });
+
+  // retrieve a specific entry for the array of people
   getPerson.addEventListener("click", async (event) => {
     event.preventDefault();
     const index1 = encodeURIComponent(index.value);
     console.log("index 1 is ", index1);
     try {
-      const response = await fetch(`/api/v1/people/${index1}`, {
+      const response = await fetch(`/api/v1/people/${index1}`, { 
         headers: { "Content-Type": "application/json" },
       });
       const data = await response.json();
@@ -49,3 +55,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
