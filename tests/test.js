@@ -1,3 +1,34 @@
+// Chai
+// available for both node.js and the browser using any test framework you like.
+// Package is available through npm:
+  // npm install chai
+// Recommend adding it to package.json devDependencies using a * as the version tag. This will ensure that you always have the most recent version after running npm install
+
+// "devDependencies": {
+//   "chai": "*",
+//   "mocha": "*"
+// }, "//": "mocha is our preference, but you can use any test runner you like"
+
+// BDD
+// The BDD style comes in two flavors: expect and should. Both use the same chainable language to construct assertions, but they differ in the way an assertion is initially constructed. In the case of should, there are also some caveats and additional tools to overcome the caveats.
+// In both scenarios, you chain together natural language assertions.
+
+// Should
+// The should style allows for the same chainable assertions as the expect interface, however it extends each object with a should property to start your chain. This style has some issues when used with Internet Explorer, so be aware of browser compatibility.
+// The should interface extends Object.prototype to provide a single getter as the starting point for your language assertions. It works on node.js and in all modern browsers except Internet Explorer.
+
+// var should = require('chai').should() //actually call the function
+//   , foo = 'bar'
+//   , beverages = { tea: [ 'chai', 'matcha', 'oolong' ] };
+// 
+// foo.should.be.a('string');
+// foo.should.equal('bar');
+// foo.should.have.lengthOf(3);
+// beverages.should.have.property('tea').with.lengthOf(3);
+
+// Should Extras
+// Given that should works by extending Object.prototype, there are some scenarios where should will not work. Mainly, if you are trying to check the existence of an object.
+
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const { app, server } = require("../app");
